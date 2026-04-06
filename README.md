@@ -4,7 +4,7 @@
 - **.NET 8** | **Clean Architecture** | **CQRS + MediatR** | **DDD**
 - **Dapper** + **SQLite** | **JWT** | **BCrypt** | **Refit** | **Swagger**
 - **xUnit** + **NSubstitute** + **FluentAssertions**
-- **Docker** + **Docker Compose**
+- **Docker** + **Docker Compose** | **Nginx** (API Gateway / Load Balancer)
 
 ---
 
@@ -23,7 +23,9 @@ BankMore/
 │   └── BankMore.Transferencia.API/             # Controllers, Swagger, Middleware
 └── tests/
     ├── BankMore.ContaCorrente.Tests/            # Unitários — xUnit + NSubstitute
+    ├── BankMore.ContaCorrente.IntegrationTests/ # Integração — WebApplicationFactory
     ├── BankMore.Transferencia.Tests/            # Unitários — xUnit + NSubstitute
+    └── BankMore.Transferencia.IntegrationTests/ # Integração — WebApplicationFactory
 ```
 
 ### Padrões aplicados
@@ -52,6 +54,74 @@ Responsável por transferências entre contas. Comunica-se com a API Conta Corre
 
 ---
 
+## Alta Disponibilidade com Nginx
+
+O projeto utiliza **Nginx como API Gateway e Load Balancer**, distribuindo as requisições entre múltiplas instâncias de cada serviço de forma transparente para o cliente.
+
+### Topologia
+
+```
+                         ┌─────────────────────────┐
+                         │        Nginx Gateway     │
+                         │   (bankmore-gateway)     │
+                         └────────────┬────────────┘
+                                      │
+              ┌───────────────────────┴───────────────────────┐
+              │                                               │
+         :5001                                           :5002
+    upstream conta_corrente                      upstream transferencia
+              │                                               │
+   ┌──────────┴──────────┐                     ┌─────────────┴─────────────┐
+   │                     │                     │                           │
+conta-corrente-api-1  conta-corrente-api-2  transferencia-api-1  transferencia-api-2
+    :8080                  :8080                  :8080                  :8080
+```
+
+### Como funciona
+
+- O **Docker** resolve o nome do serviço (`conta-corrente-api`, `transferencia-api`) automaticamente para todas as instâncias via round-robin interno
+- O **Nginx** expõe os dois serviços nas portas `5001` e `5002` como ponto de entrada único
+- A **idempotência via `IdRequisicao`** garante que múltiplas instâncias processando a mesma requisição não gerem operações duplicadas — essa é a chave para o funcionamento correto em alta disponibilidade
+
+### nginx.conf
+
+```nginx
+events {
+    worker_connections 1024;
+}
+
+http {
+    # O Docker faz o Load Balance automático para o nome do serviço
+    upstream conta_corrente {
+        server conta-corrente-api:8080;
+    }
+
+    upstream transferencia {
+        server transferencia-api:8080;
+    }
+
+    server {
+        listen 5001;
+        location / {
+            proxy_pass http://conta_corrente;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    }
+
+    server {
+        listen 5002;
+        location / {
+            proxy_pass http://transferencia;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    }
+}
+```
+
+---
+
 ## Como executar
 
 ### Localmente
@@ -68,7 +138,7 @@ dotnet run
 # Swagger: http://localhost:5100/swagger
 ```
 
-### Via Docker (1 instância)
+### Via Docker (1 instância por serviço)
 
 ```bash
 docker compose up -d --build
@@ -82,7 +152,18 @@ docker compose up -d --build
 docker compose up -d --build --scale conta-corrente-api=2 --scale transferencia-api=2
 ```
 
-A idempotência garante que múltiplas instâncias processando a mesma requisição não duplicam operações.
+O Nginx distribui as requisições entre as instâncias automaticamente. A idempotência garante que múltiplas instâncias processando a mesma requisição não duplicam operações.
+
+### Containers em execução (exemplo com 2 instâncias)
+
+```
+IMAGE                        NAME                          PORTS
+nginx:latest                 bankmore-gateway              0.0.0.0:5001-5002->5001-5002/tcp
+bankmore-transferencia-api   bankmore-transferencia-api-1  8080/tcp
+bankmore-transferencia-api   bankmore-transferencia-api-2  8080/tcp
+bankmore-conta-corrente-api  bankmore-conta-corrente-api-1 8080/tcp
+bankmore-conta-corrente-api  bankmore-conta-corrente-api-2 8080/tcp
+```
 
 ### Executar testes
 
@@ -177,7 +258,7 @@ Registra crédito ou débito na conta corrente.
   "tipo": "C"
 }
 ```
-> `numeroConta`: null usa a conta do token. `tipo`: C = Crédito, D = Débito.
+> `numeroConta`: null usa a conta do token. `tipo`: C = Crédito, D = Débito.  
 > `idRequisicao`: gerado pelo cliente — garante idempotência em retentativas.
 
 **Respostas:**
@@ -265,7 +346,6 @@ Efetua transferência entre contas da mesma instituição.
 
 > Os testes de integração sobem a API em memória via `WebApplicationFactory` — não precisam de nenhum serviço externo rodando.
 
-
 ---
 
 ## Infraestrutura
@@ -276,5 +356,3 @@ Efetua transferência entre contas da mesma instituição.
 http://69.169.109.42:5001/swagger  → API Conta Corrente
 http://69.169.109.42:5002/swagger  → API Transferência
 ```
-
-
