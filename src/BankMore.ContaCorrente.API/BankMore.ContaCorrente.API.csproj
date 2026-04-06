@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankMore.ContaCorrente.Application\BankMore.ContaCorrente.Application.csproj" />
+    <ProjectReference Include="..\BankMore.ContaCorrente.Infrastructure\BankMore.ContaCorrente.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Database\schema.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

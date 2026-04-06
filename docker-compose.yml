@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+
+  conta-corrente-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.ContaCorrente
+    container_name: bankmore-conta-corrente
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Data Source=/data/bankmore_conta_corrente.db
+      - Jwt__SecretKey=BankMore@SuperSecretKey2024!ContaCorrente#256bits
+      - Jwt__Issuer=BankMore.ContaCorrente
+      - Jwt__ExpiracaoMinutos=60
+    volumes:
+      - conta_corrente_data:/data
+    networks:
+      - bankmore-net
+    restart: unless-stopped
+
+  transferencia-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.Transferencia
+    container_name: bankmore-transferencia
+    ports:
+      - "5002:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Data Source=/data/bankmore_transferencia.db
+      - Jwt__SecretKey=BankMore@SuperSecretKey2024!ContaCorrente#256bits
+      - Jwt__Issuer=BankMore.ContaCorrente
+      - Jwt__ExpiracaoMinutos=60
+      - ContaCorrenteApi__BaseUrl=http://conta-corrente-api:8080
+    volumes:
+      - transferencia_data:/data
+    networks:
+      - bankmore-net
+    depends_on:
+      - conta-corrente-api
+    restart: unless-stopped
+
+volumes:
+  conta_corrente_data:
+  transferencia_data:
+
+networks:
+  bankmore-net:
+    driver: bridge

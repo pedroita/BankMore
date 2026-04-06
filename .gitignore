@@ -1,0 +1,12 @@
+# Pastas de saída de compilação (Debug/Release)
+bin/
+obj/
+
+# Pastas específicas do Visual Studio e VS Code
+.vs/
+.vscode/
+
+# Arquivos de usuário e caches
+*.user
+*.suo
+*.cache

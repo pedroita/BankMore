@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.ContaCorrente.Domain", "src\BankMore.ContaCorrente.Domain\BankMore.ContaCorrente.Domain.csproj", "{A1B2C3D4-0001-0001-0001-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.ContaCorrente.Application", "src\BankMore.ContaCorrente.Application\BankMore.ContaCorrente.Application.csproj", "{A1B2C3D4-0002-0002-0002-000000000002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.ContaCorrente.Infrastructure", "src\BankMore.ContaCorrente.Infrastructure\BankMore.ContaCorrente.Infrastructure.csproj", "{A1B2C3D4-0003-0003-0003-000000000003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.ContaCorrente.API", "src\BankMore.ContaCorrente.API\BankMore.ContaCorrente.API.csproj", "{A1B2C3D4-0004-0004-0004-000000000004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.ContaCorrente.Tests", "tests\BankMore.ContaCorrente.Tests\BankMore.ContaCorrente.Tests.csproj", "{A1B2C3D4-0005-0005-0005-000000000005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.Transferencia.API", "src\BankMore.Transferencia.API\BankMore.Transferencia.API.csproj", "{4A920D53-68C2-59A1-13A7-C429CAB3DD94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.Transferencia.Infrastructure", "src\BankMore.Transferencia.Infrastructure\BankMore.Transferencia.Infrastructure.csproj", "{61C46349-2F9A-D47C-24D0-8B5D78DD4556}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.Transferencia.Domain", "src\BankMore.Transferencia.Domain\BankMore.Transferencia.Domain.csproj", "{10CDE3B1-A37E-E27F-2228-E8E79A66C5AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.Transferencia.Application", "src\BankMore.Transferencia.Application\BankMore.Transferencia.Application.csproj", "{B5863C7E-B4AE-7364-B8BA-1F40A09F47C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankMore.Transferencia.Tests", "tests\BankMore.Transferencia.Tests\BankMore.Transferencia.Tests.csproj", "{89C10AE9-EDD2-468F-8210-B849186E08A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile.ContaCorrente = Dockerfile.ContaCorrente
+		Dockerfile.Transferencia = Dockerfile.Transferencia
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1B2C3D4-0001-0001-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-0001-0001-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-0001-0001-0001-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-0001-0001-0001-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-0002-0002-0002-000000000002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-0002-0002-0002-000000000002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-0002-0002-0002-000000000002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-0002-0002-0002-000000000002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-0003-0003-0003-000000000003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-0003-0003-0003-000000000003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-0003-0003-0003-000000000003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-0003-0003-0003-000000000003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-0004-0004-0004-000000000004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-0004-0004-0004-000000000004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-0004-0004-0004-000000000004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-0004-0004-0004-000000000004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-0005-0005-0005-000000000005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-0005-0005-0005-000000000005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-0005-0005-0005-000000000005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-0005-0005-0005-000000000005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A920D53-68C2-59A1-13A7-C429CAB3DD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A920D53-68C2-59A1-13A7-C429CAB3DD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A920D53-68C2-59A1-13A7-C429CAB3DD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A920D53-68C2-59A1-13A7-C429CAB3DD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C46349-2F9A-D47C-24D0-8B5D78DD4556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C46349-2F9A-D47C-24D0-8B5D78DD4556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C46349-2F9A-D47C-24D0-8B5D78DD4556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C46349-2F9A-D47C-24D0-8B5D78DD4556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10CDE3B1-A37E-E27F-2228-E8E79A66C5AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CDE3B1-A37E-E27F-2228-E8E79A66C5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CDE3B1-A37E-E27F-2228-E8E79A66C5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CDE3B1-A37E-E27F-2228-E8E79A66C5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5863C7E-B4AE-7364-B8BA-1F40A09F47C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5863C7E-B4AE-7364-B8BA-1F40A09F47C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5863C7E-B4AE-7364-B8BA-1F40A09F47C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5863C7E-B4AE-7364-B8BA-1F40A09F47C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C10AE9-EDD2-468F-8210-B849186E08A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C10AE9-EDD2-468F-8210-B849186E08A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C10AE9-EDD2-468F-8210-B849186E08A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C10AE9-EDD2-468F-8210-B849186E08A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EC71B3A-BAA9-46F2-8774-3C1784CD8687}
+	EndGlobalSection
+EndGlobal
