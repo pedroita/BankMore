@@ -23,9 +23,7 @@ BankMore/
 │   └── BankMore.Transferencia.API/             # Controllers, Swagger, Middleware
 └── tests/
     ├── BankMore.ContaCorrente.Tests/            # Unitários — xUnit + NSubstitute
-    ├── BankMore.ContaCorrente.IntegrationTests/ # Integração — WebApplicationFactory
     ├── BankMore.Transferencia.Tests/            # Unitários — xUnit + NSubstitute
-    └── BankMore.Transferencia.IntegrationTests/ # Integração — WebApplicationFactory
 ```
 
 ### Padrões aplicados
